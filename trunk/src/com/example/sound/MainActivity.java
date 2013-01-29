@@ -7,10 +7,22 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
+//Import de test
+import java.lang.Thread;
+
+public class MyMusicThread extends Thread
+{
+  MyMusicThread(){} //Ctor
+
+  public void run(){ //run to call and play sound
+   playSound(R.raw.titi);
+  }
+}
 
 public class MainActivity extends Activity 
 {
 	private MediaPlayer mplayer = null;
+  MyMusicThread       mmt = new MyMusicThread();
     
 	private void playSound(int Id)
 	{
@@ -105,7 +117,7 @@ public class MainActivity extends Activity
     {
 		public void onClick(View v)
 		{
-			playSound(R.raw.titi);	
+			mmt.start();
 		}
 	});
     }
