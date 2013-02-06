@@ -1,43 +1,118 @@
 package com.example.sound;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class MainActivity extends Activity 
 {
-    MyMusicThread       mmt1 = null;
-    MyMusicThread       mmt2 = null;
-    MyMusicThread       mmt3 = null;
-    MyMusicThread       mmt4 = null;
-    MyMusicThread       mmt5 = null;
-    MyMusicThread       mmt6 = null;
-    MyMusicThread       mmt7 = null;
-    MyMusicThread       mmt8 = null;
+	final		MainActivity	start = this;
+	private		int				_time = 5000;
+	//private		Thread			SplashScreenThread;
+	private		DrawRectangle	dR1;
+	private		DrawRectangle	dR2;
+	private		DrawRectangle	dR3;
+	private		RelativeLayout	_mainLayout;
 	
+	OnClickListener				b1click;
+	OnClickListener				b2click;
+	OnClickListener				b3click;
+	OnClickListener				b4click;
+	OnClickListener				b5click;
+	OnClickListener				b6click;
+	OnClickListener				b7click;
+	OnClickListener				b8click;
+	MyMusicThread[]				_musicThreadsArray;
+
     @Override
     public void onCreate(Bundle savedInstanceState) 
     {
-    	System.out.println("Arrivee dans le create de mainactivity");
     	super.onCreate(savedInstanceState);
     	setContentView(R.layout.activity_main);
-    	System.out.println("pwet pwet");
- 
-     
-        TextView test = (TextView) findViewById(R.id.textView);
-        mmt1 = new MyMusicThread(MediaPlayer.create(this, R.raw.up));
-        mmt2 = new MyMusicThread(MediaPlayer.create(this, R.raw.dwqdwqcdcc));
-        mmt3 = new MyMusicThread(MediaPlayer.create(this, R.raw.dwqwdqdwq));
-        mmt4 = new MyMusicThread(MediaPlayer.create(this, R.raw.edjdfj));
-        mmt5 = new MyMusicThread(MediaPlayer.create(this, R.raw.eeee));
-        mmt6 = new MyMusicThread(MediaPlayer.create(this, R.raw.ewew));
-        mmt7 = new MyMusicThread(MediaPlayer.create(this, R.raw.tat));
-        mmt8 = new MyMusicThread(MediaPlayer.create(this, R.raw.titi));
-        
+    	/*
+    	SplashScreenThread = new Thread() {
+		@Override
+		public void run()
+		{
+			try 
+			{
+				synchronized (this)
+				{
+					dR1 = new DrawRectangle(start, Color.BLACK, 0, 100, 400, 150);
+					dR2 = new DrawRectangle(start, Color.BLUE, 0, 150, 350, 200);
+					dR3 = new DrawRectangle(start, Color.GREEN, 0, 200, 375, 250);
+					_mainLayout.addView(dR1);
+					_mainLayout.addView(dR2);
+					_mainLayout.addView(dR3);
+					wait(_time);
+				}
+			}
+			catch(InterruptedException e) {}
+			finally
+			{
+				System.out.println("LALALA Thread died OK?");
+			}
+		}
+		};
+		SplashScreenThread.start();*/
+		
+		_musicThreadsArray = new MyMusicThread[8];
+		_musicThreadsArray[0] = new MyMusicThread(MediaPlayer.create(this, R.raw.up));
+		_musicThreadsArray[1] = new MyMusicThread(MediaPlayer.create(this, R.raw.dwqdwqcdcc));
+		_musicThreadsArray[2] = new MyMusicThread(MediaPlayer.create(this, R.raw.dwqwdqdwq));
+		_musicThreadsArray[3] = new MyMusicThread(MediaPlayer.create(this, R.raw.edjdfj));
+		_musicThreadsArray[4] = new MyMusicThread(MediaPlayer.create(this, R.raw.eeee));
+		_musicThreadsArray[5] = new MyMusicThread(MediaPlayer.create(this, R.raw.ewew));
+		_musicThreadsArray[6] = new MyMusicThread(MediaPlayer.create(this, R.raw.tat));
+		_musicThreadsArray[7] = new MyMusicThread(MediaPlayer.create(this, R.raw.titi));
+
+		b1click = new OnClickListener(){
+			public void onClick(View v){
+				_musicThreadsArray[0].run();
+				}
+			};
+        b2click = new OnClickListener(){
+          	public void onClick(View v){
+           		_musicThreadsArray[1].run();
+           	}
+        };
+        b3click = new OnClickListener(){
+           	public void onClick(View v){
+           		_musicThreadsArray[2].run();
+           	}
+        };
+        b4click = new OnClickListener(){
+           	public void onClick(View v){
+           		_musicThreadsArray[3].run();
+           	}
+        };
+        b5click = new OnClickListener(){
+           	public void onClick(View v){
+           		_musicThreadsArray[4].run();
+           	}
+        };
+        b6click = new OnClickListener(){
+           	public void onClick(View v){
+           		_musicThreadsArray[5].run();
+           	}
+        };
+        b7click = new OnClickListener(){
+           	public void onClick(View v){
+           		_musicThreadsArray[6].run();
+           	}
+        };
+        b8click = new OnClickListener(){
+           	public void onClick(View v){
+           		_musicThreadsArray[7].run();
+           	}
+        };
+
         Button button1 = (Button) findViewById(R.id.button1);
         Button button2 = (Button) findViewById(R.id.button2);
         Button button3 = (Button) findViewById(R.id.button3);
@@ -46,63 +121,21 @@ public class MainActivity extends Activity
         Button button6 = (Button) findViewById(R.id.button6);
         Button button7 = (Button) findViewById(R.id.button7);
         Button button8 = (Button) findViewById(R.id.button8);
-        
-        mmt1.start();
-        mmt2.start();
-        mmt3.start();
-        mmt4.start();
-        mmt5.start();
-        mmt6.start();
-        mmt7.start();
-        mmt8.start();
-        
-     button8.setText("fdfdfdfdfdfd");
-    test.setText("HELLOOOOOOO \nWOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOORLD");
-    button1.setOnClickListener(new OnClickListener(){
-    	public void onClick(View v){
-    		mmt1.run();
-        	}
-        });
-    
-    button2.setOnClickListener(new OnClickListener(){
-		public void onClick(View v){
-			mmt2.run();
-		}
-	});
-    
-    button3.setOnClickListener(new OnClickListener(){
-		public void onClick(View v){
-			mmt3.run();
-		}
-	});
-    
-    button4.setOnClickListener(new OnClickListener(){
-		public void onClick(View v){
-			mmt4.run();
-		}
-	});
-    button5.setOnClickListener(new OnClickListener(){
-		public void onClick(View v){
-			mmt5.run();
-		}
-	});
-    
-    button6.setOnClickListener(new OnClickListener(){
-		public void onClick(View v){
-			mmt6.run();
-		}
-	});
-    
-    button7.setOnClickListener(new OnClickListener(){
-		public void onClick(View v){
-			mmt7.run();
-		}
-	});
 
-    button8.setOnClickListener(new OnClickListener(){
-		public void onClick(View v){
-			mmt8.run();
-		}
-	});
+        button1.setVisibility(0);
+
+        TextView test = (TextView) findViewById(R.id.textView);
+        button8.setText("fdfdfdfdfdfd");
+        test.setText("HELLOOOOOOO \nWOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOORLD");
+
+        button1.setOnClickListener(b1click);
+        button2.setOnClickListener(b2click);
+        button3.setOnClickListener(b3click);
+        button4.setOnClickListener(b4click);
+        button5.setOnClickListener(b5click);
+        button6.setOnClickListener(b6click);
+        button7.setOnClickListener(b7click);
+        button8.setOnClickListener(b8click);
+    	System.out.println("LALALA Tout yé bon ici...");
     }
 }
