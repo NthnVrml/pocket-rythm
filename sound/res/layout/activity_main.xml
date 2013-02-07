@@ -61,21 +61,16 @@
         	android:text="@string/son8" />
    	</LinearLayout>
     	
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	    	android:background="@drawable/rectangle_jaune"
-    		android:layout_width="250dp"
-	        android:layout_weight="1"
-    		android:layout_height="match_parent">
-    	    <GridView xmlns:android="http://schemas.android.com/apk/res/android"
-    			android:id="@+id/gridV1"
-    			android:numColumns="auto_fit"
-   				android:gravity="fill"
-   				android:columnWidth="200dp"
-    			android:stretchMode="columnWidth"
-    			android:layout_width="fill_parent"
-    			android:layout_height="fill_parent" >
-		</GridView>
-    </LinearLayout>
+    <GridView xmlns:android="http://schemas.android.com/apk/res/android"
+			android:id="@+id/gridV1"
+    		android:layout_weight="1"
+    		android:numColumns="4"
+   			android:gravity="fill"
+   			android:columnWidth="125dp"
+    		android:stretchMode="columnWidth"
+    		android:layout_width="500dp"
+    		android:layout_height="fill_parent" >
+	</GridView>
     	
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	    android:layout_weight="0"

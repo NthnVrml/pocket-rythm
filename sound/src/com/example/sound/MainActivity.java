@@ -1,6 +1,7 @@
 package com.example.sound;
 
 import android.app.Activity;
+import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -21,8 +22,9 @@ public class MainActivity extends Activity
 	private		DrawRectangle	dR0, dR1, dR2, dR3, dR4, dR5, dR6, dR7;
 	private		RelativeLayout	_mainLayout;
 	
-	GridView	GridV;
-	
+	GridView					GridV;
+	OnClickListener				_b1click, _b2click, _b3click, _b4click,
+								_b5click, _b6click, _b7click, _b8click;
 	static final String[] str = new String[] {
 		"1", "2", "3", "4", "5",
 		"6", "7", "8", "9", "10",
@@ -32,51 +34,24 @@ public class MainActivity extends Activity
 
 	OnClickListener				splashListener = new OnClickListener(){
 		public void onClick(View v){
-			onLife();
+			onAfterSplashScreen();
 			}
 		};
-	OnClickListener				b1click = new OnClickListener(){
-			public void onClick(View v){
-				_musicThreadsArray[0].run();
-				}
-			};
-	OnClickListener				b2click = new OnClickListener(){
-          	public void onClick(View v){
-           		_musicThreadsArray[1].run();
+    OnClickListener        		playListener = new OnClickListener(){
+           	public void onClick(View v){
+           		onPlay();
            	}
         };
-    OnClickListener        		b3click = new OnClickListener(){
+    OnClickListener        		stopListener = new OnClickListener(){
            	public void onClick(View v){
-           		_musicThreadsArray[2].run();
-           	}
-        };
-    OnClickListener        		b4click = new OnClickListener(){
-           	public void onClick(View v){
-           		_musicThreadsArray[3].run();
-           	}
-        };
-    OnClickListener        		b5click = new OnClickListener(){
-           	public void onClick(View v){
-           		_musicThreadsArray[4].run();
-           	}
-        };
-    OnClickListener        		b6click = new OnClickListener(){
-           	public void onClick(View v){
-           		_musicThreadsArray[5].run();
-           	}
-        };
-    OnClickListener       		b7click = new OnClickListener(){
-           	public void onClick(View v){
-           		_musicThreadsArray[6].run();
-           	}
-        };
-    OnClickListener        		b8click = new OnClickListener(){
-           	public void onClick(View v){
-           		_musicThreadsArray[7].run();
+           		onEdition();
            	}
         };
 
-	public void onLife()
+//--------------------------------------------------------------------
+      	
+    // After touching the SplashScreen
+	public void onAfterSplashScreen()
 	{
     	setContentView(R.layout.activity_main);
         Button button1 = (Button) findViewById(R.id.button1);
@@ -88,8 +63,60 @@ public class MainActivity extends Activity
         Button button7 = (Button) findViewById(R.id.button7);
         Button button8 = (Button) findViewById(R.id.button8);
 
+    	_b1click = new OnClickListener(){
+			public void onClick(View v){
+				_musicThreadsArray[0].run();
+			}
+		};
+		_b2click = new OnClickListener(){
+          	public void onClick(View v){
+           		_musicThreadsArray[1].run();
+       		}
+       	};
+        _b3click = new OnClickListener(){
+           	public void onClick(View v){
+           		_musicThreadsArray[2].run();
+       		}
+       	};
+        _b4click = new OnClickListener(){
+           	public void onClick(View v){
+           		_musicThreadsArray[3].run();
+       		}
+       	};
+        _b5click = new OnClickListener(){
+           	public void onClick(View v){
+           		_musicThreadsArray[4].run();
+       		}
+       	};
+        _b6click = new OnClickListener(){
+           	public void onClick(View v){
+           		_musicThreadsArray[5].run();
+       		}
+       	};
+        _b7click = new OnClickListener(){
+           	public void onClick(View v){
+           		_musicThreadsArray[6].run();
+       		}
+       	};
+        _b8click = new OnClickListener(){
+           	public void onClick(View v){
+           		_musicThreadsArray[7].run();
+       		}
+       	};
+        button1.setOnClickListener(_b1click);
+        button2.setOnClickListener(_b2click);
+        button3.setOnClickListener(_b3click);
+        button4.setOnClickListener(_b4click);
+        button5.setOnClickListener(_b5click);
+        button6.setOnClickListener(_b6click);
+        button7.setOnClickListener(_b7click);
+        button8.setOnClickListener(_b8click);
+
         Button Buttonplay = (Button) findViewById(R.id.Buttonplay);
         Button ButtonSave = (Button) findViewById(R.id.ButtonSave);
+        
+        //Uncomment after both .xml && onPlay func are OK.
+        //Buttonplay.setOnClickListener(playListener);
 
         GridV = (GridView) findViewById(R.id.gridV1);
     	ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
@@ -105,25 +132,32 @@ public class MainActivity extends Activity
 			}
 		});
 
-        button1.setOnClickListener(b1click);
-        button2.setOnClickListener(b2click);
-        button3.setOnClickListener(b3click);
-        button4.setOnClickListener(b4click);
-        button5.setOnClickListener(b5click);
-        button6.setOnClickListener(b6click);
-        button7.setOnClickListener(b7click);
-        button8.setOnClickListener(b8click);
 	}
+
+//--------------------------------------------------------------------
 	
+	//When pressing PLAY in Edition Mode
+    public void onEdition()
+    {
+    }
+
+//--------------------------------------------------------------------
+  	
+	//When pressing STOP in Edition Mode
+	public void onPlay()
+	{
+	}
+
+//--------------------------------------------------------------------
+		
     @Override
     public void onCreate(Bundle savedInstanceState) 
     {
     	super.onCreate(savedInstanceState);
+    	setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
     	setContentView(R.layout.startscreen);
     	
-    	System.out.println("LALALA Starting test...");
 		_musicThreadsArray = new MyMusicThread[8];
-    	System.out.println("LALALA Retrieving layout...");
 		_mainLayout = (RelativeLayout) findViewById(R.id.splashScreen);
 		
 		_musicThreadsArray[0] = new MyMusicThread(MediaPlayer.create(this, R.raw.up));
