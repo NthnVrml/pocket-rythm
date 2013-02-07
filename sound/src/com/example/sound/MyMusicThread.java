@@ -8,7 +8,7 @@ public class MyMusicThread extends Thread
 	int						_started;
 	MediaPlayer				_mediaplayer = null;
 
-  MyMusicThread(MediaPlayer mp){ //Ctor
+  MyMusicThread(MediaPlayer mp){ //Constructor
 	  _started = 0;
 	  _mediaplayer = mp;
 	  }

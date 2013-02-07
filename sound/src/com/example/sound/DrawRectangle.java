@@ -2,7 +2,6 @@ package com.example.sound;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.view.View;
 
@@ -13,6 +12,11 @@ public class DrawRectangle extends View{
 	int _left;
 	int _right;
 	int _bottom;
+	Paint _paint;
+	
+	private DrawRectangle(Context context) { //Should never be called
+		super(context);
+	}
 	
 	public DrawRectangle(Context context, int color, int left, int top, int right, int bottom){
 		super(context);
@@ -21,17 +25,17 @@ public class DrawRectangle extends View{
 		_top = top;
 		_right = right;
 		_bottom = bottom;
+		_paint = new Paint();
 	}
 
 	@Override 
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
     	System.out.println("YOYOYOYOYOYOYO");
-		Paint paint = new Paint();
-		paint.setStyle(Paint.Style.FILL);
+		_paint.setStyle(Paint.Style.FILL);
 		
-		paint.setAntiAlias(false);
-		paint.setColor(_color);
-		canvas.drawRect(_left, _top, _right, _bottom, paint);
+		_paint.setAntiAlias(false);
+		_paint.setColor(_color);
+		canvas.drawRect(_left, _top, _right, _bottom, _paint);
 	}
 }

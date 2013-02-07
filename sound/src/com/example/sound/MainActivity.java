@@ -1,24 +1,24 @@
 package com.example.sound;
 
 import android.app.Activity;
-import android.graphics.Color;
+//import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
+//import android.widget.RelativeLayout;
 
 public class MainActivity extends Activity 
 {
+	protected	boolean			_loadComplete = false;
 	final		MainActivity	start = this;
-	private		int				_time = 5000;
-	//private		Thread			SplashScreenThread;
-	private		DrawRectangle	dR1;
-	private		DrawRectangle	dR2;
-	private		DrawRectangle	dR3;
-	private		RelativeLayout	_mainLayout;
+	//private		int				_time = 5000;
+	private		Thread			SplashScreenThread;
+	//private		DrawRectangle	dR1;
+	//private		DrawRectangle	dR2;
+	//private		DrawRectangle	dR3;
+	//private		RelativeLayout	_mainLayout;
 	
 	OnClickListener				b1click;
 	OnClickListener				b2click;
@@ -35,7 +35,7 @@ public class MainActivity extends Activity
     {
     	super.onCreate(savedInstanceState);
     	setContentView(R.layout.activity_main);
-    	/*
+    	
     	SplashScreenThread = new Thread() {
 		@Override
 		public void run()
@@ -44,33 +44,41 @@ public class MainActivity extends Activity
 			{
 				synchronized (this)
 				{
-					dR1 = new DrawRectangle(start, Color.BLACK, 0, 100, 400, 150);
-					dR2 = new DrawRectangle(start, Color.BLUE, 0, 150, 350, 200);
-					dR3 = new DrawRectangle(start, Color.GREEN, 0, 200, 375, 250);
-					_mainLayout.addView(dR1);
-					_mainLayout.addView(dR2);
-					_mainLayout.addView(dR3);
-					wait(_time);
+//					dR1 = new DrawRectangle(start, Color.BLACK, 0, 100, 400, 150);
+//					dR2 = new DrawRectangle(start, Color.BLUE, 0, 150, 350, 200);
+//					dR3 = new DrawRectangle(start, Color.GREEN, 0, 200, 375, 250);
+//					_mainLayout.addView(dR1);
+//					_mainLayout.addView(dR2);
+//					_mainLayout.addView(dR3);
+					_musicThreadsArray = new MyMusicThread[8];
+					_musicThreadsArray[0] = new MyMusicThread(MediaPlayer.create(start, R.raw.up));
+					_musicThreadsArray[1] = new MyMusicThread(MediaPlayer.create(start, R.raw.dwqdwqcdcc));
+					_musicThreadsArray[2] = new MyMusicThread(MediaPlayer.create(start, R.raw.dwqwdqdwq));
+					_musicThreadsArray[3] = new MyMusicThread(MediaPlayer.create(start, R.raw.edjdfj));
+					_musicThreadsArray[4] = new MyMusicThread(MediaPlayer.create(start, R.raw.eeee));
+					_musicThreadsArray[5] = new MyMusicThread(MediaPlayer.create(start, R.raw.ewew));
+					_musicThreadsArray[6] = new MyMusicThread(MediaPlayer.create(start, R.raw.tat));
+					_musicThreadsArray[7] = new MyMusicThread(MediaPlayer.create(start, R.raw.titi));
+					
+					_musicThreadsArray[0].start();
+					_musicThreadsArray[1].start();
+					_musicThreadsArray[2].start();
+					_musicThreadsArray[3].start();
+					_musicThreadsArray[4].start();
+					_musicThreadsArray[5].start();
+					_musicThreadsArray[6].start();
+					_musicThreadsArray[7].start();
 				}
 			}
-			catch(InterruptedException e) {}
+			catch (Exception e) {}
 			finally
 			{
+				start._loadComplete = true;
 				System.out.println("LALALA Thread died OK?");
 			}
 		}
 		};
-		SplashScreenThread.start();*/
-		
-		_musicThreadsArray = new MyMusicThread[8];
-		_musicThreadsArray[0] = new MyMusicThread(MediaPlayer.create(this, R.raw.up));
-		_musicThreadsArray[1] = new MyMusicThread(MediaPlayer.create(this, R.raw.dwqdwqcdcc));
-		_musicThreadsArray[2] = new MyMusicThread(MediaPlayer.create(this, R.raw.dwqwdqdwq));
-		_musicThreadsArray[3] = new MyMusicThread(MediaPlayer.create(this, R.raw.edjdfj));
-		_musicThreadsArray[4] = new MyMusicThread(MediaPlayer.create(this, R.raw.eeee));
-		_musicThreadsArray[5] = new MyMusicThread(MediaPlayer.create(this, R.raw.ewew));
-		_musicThreadsArray[6] = new MyMusicThread(MediaPlayer.create(this, R.raw.tat));
-		_musicThreadsArray[7] = new MyMusicThread(MediaPlayer.create(this, R.raw.titi));
+		SplashScreenThread.start();
 
 		b1click = new OnClickListener(){
 			public void onClick(View v){
@@ -112,7 +120,6 @@ public class MainActivity extends Activity
            		_musicThreadsArray[7].run();
            	}
         };
-
         Button button1 = (Button) findViewById(R.id.button1);
         Button button2 = (Button) findViewById(R.id.button2);
         Button button3 = (Button) findViewById(R.id.button3);
@@ -122,12 +129,8 @@ public class MainActivity extends Activity
         Button button7 = (Button) findViewById(R.id.button7);
         Button button8 = (Button) findViewById(R.id.button8);
 
-        button1.setVisibility(0);
 
-        TextView test = (TextView) findViewById(R.id.textView);
-        button8.setText("fdfdfdfdfdfd");
-        test.setText("HELLOOOOOOO \nWOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOORLD");
-
+        while (!_loadComplete); // A changer dès que possible!
         button1.setOnClickListener(b1click);
         button2.setOnClickListener(b2click);
         button3.setOnClickListener(b3click);

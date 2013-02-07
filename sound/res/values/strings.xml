@@ -1,9 +1,15 @@
 <resources>
 
-    <string name="app_name">sound</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="app_name">PocketRhythm</string>
     <string name="menu_settings">Settings</string>
-    <string name="title_activity_main">MainActivity</string>
-    <string name="lool">loooooool</string>
-
+    <string name="title_activity_main">PocketRhythm</string>
+    <string name="son1">son1</string>
+    <string name="son2">son2</string>
+    <string name="son3">son3</string>
+    <string name="son4">son4</string>
+    <string name="son5">son5</string>
+    <string name="son6">son6</string>
+    <string name="son7">son7</string>
+    <string name="son8">son8</string>
+    
 </resources>
