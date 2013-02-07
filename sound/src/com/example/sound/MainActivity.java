@@ -6,8 +6,15 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 //import android.widget.RelativeLayout;
+import android.widget.GridView;
+import android.widget.AdapterView.OnItemClickListener;
+
 
 public class MainActivity extends Activity 
 {
@@ -19,6 +26,14 @@ public class MainActivity extends Activity
 	//private		DrawRectangle	dR2;
 	//private		DrawRectangle	dR3;
 	//private		RelativeLayout	_mainLayout;
+	
+	GridView	GridV;
+	
+	static final String[] str = new String[] {
+		"1", "2", "3", "4", "5",
+		"6", "7", "8", "9", "10",
+		"11", "12", "13", "14", "15",
+		"16"};
 	
 	OnClickListener				b1click;
 	OnClickListener				b2click;
@@ -129,6 +144,22 @@ public class MainActivity extends Activity
         Button button7 = (Button) findViewById(R.id.button7);
         Button button8 = (Button) findViewById(R.id.button8);
 
+        Button Buttonplay = (Button) findViewById(R.id.Buttonplay);
+        Button ButtonSave = (Button) findViewById(R.id.ButtonSave);
+
+        GridV = (GridView) findViewById(R.id.gridV1);
+    	ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+				android.R.layout.simple_list_item_1, str);
+ 
+		GridV.setAdapter(adapter);
+ 
+		GridV.setOnItemClickListener(new OnItemClickListener() {
+			public void onItemClick(AdapterView<?> parent, View v,
+				int position, long id) {
+			   Toast.makeText(getApplicationContext(),
+				((TextView) v).getText(), Toast.LENGTH_SHORT).show();
+			}
+		});
 
         while (!_loadComplete); // A changer dès que possible!
         button1.setOnClickListener(b1click);
