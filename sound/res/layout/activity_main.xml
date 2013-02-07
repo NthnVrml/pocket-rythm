@@ -61,17 +61,40 @@
         	android:text="@string/son8" />
    	</LinearLayout>
     	
-    	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	    	android:background="@drawable/rectangle_noir"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	    	android:background="@drawable/rectangle_jaune"
     		android:layout_width="250dp"
 	        android:layout_weight="1"
     		android:layout_height="match_parent">
-    	</LinearLayout>
-
-    	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	        android:layout_weight="0"
-    		android:background="@drawable/rectangle_bleu"
-    		android:layout_width="75dp"
-    		android:layout_height="match_parent">
-    	</LinearLayout>
+    	    <GridView xmlns:android="http://schemas.android.com/apk/res/android"
+    			android:id="@+id/gridV1"
+    			android:numColumns="auto_fit"
+   				android:gravity="fill"
+   				android:columnWidth="200dp"
+    			android:stretchMode="columnWidth"
+    			android:layout_width="fill_parent"
+    			android:layout_height="fill_parent" >
+		</GridView>
+    </LinearLayout>
+    	
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	    android:layout_weight="0"
+	    android:orientation="vertical"
+	  	android:background="@drawable/rectangle_vert"
+    	android:layout_width="75dp"
+    	android:layout_height="match_parent">
+	    <Button
+        	android:id="@+id/ButtonSave"
+    	    android:layout_weight="1"
+        	android:layout_width="match_parent"
+        	android:layout_height="wrap_content"
+        	android:text="@string/save" />
+    	<Button
+    	    android:id="@+id/Buttonplay"
+    	    android:layout_weight="1"
+        	android:layout_width="match_parent"
+        	android:layout_height="wrap_content"
+        	android:text="@string/play" />
+	    </LinearLayout>
 </LinearLayout>
+

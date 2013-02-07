@@ -12,4 +12,10 @@
     <string name="son7">son7</string>
     <string name="son8">son8</string>
     
+    <string name="play">play</string>
+    <string name="load">load</string>
+    <string name="save">save</string>
+    <string name="next">next</string>
+    <string name="preview">preview</string>
+    
 </resources>
